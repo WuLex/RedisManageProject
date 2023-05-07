@@ -1,2 +1,2 @@
 # RedisManageProject
-redis基本的管理
+net6 的asp.net core mvc的redis简单管理示例
