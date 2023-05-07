@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "Add Data to Redis";
+}
+
+<title>Add Data to Redis</title>
+
+<div class="layui-container">
+        <div class="layui-row">
+            <div class="layui-col-md12">
+                <h2>Add Data to Redis</h2>
+                <hr>
+            </div>
+        </div>
+
+        <div class="layui-row">
+            <div class="layui-col-md8">
+                <form class="layui-form" action="/redis/add" method="post">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">Name:</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="Name" required lay-verify="required" placeholder="Enter name" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">Value:</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="Value" required lay-verify="required" placeholder="Enter value" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn layui-btn-normal" lay-submit lay-filter="add-data">Add</button>
+                            <button class="layui-btn layui-btn-primary" onclick="location.href='/redis/index'">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@section Scripts
+{
+    <script>
+        layui.use(['form', 'layer'], function () {
+            var form = layui.form;
+            var layer = layui.layer;
+
+            form.on('submit(add-data)', function (data) {
+                $.post('/redis/add', data.field, function (result) {
+                    if (result.success) {
+                        layer.msg('Data added successfully');
+                        setTimeout(function () {
+                            location.href = '/redis/index';
+                        }, 1000);
+                    } else {
+                        layer.msg('Failed to add data');
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+
+}
+
