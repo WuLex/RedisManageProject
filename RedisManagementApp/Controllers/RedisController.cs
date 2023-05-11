@@ -13,7 +13,6 @@ namespace RedisManagementApp.Controllers
         private readonly IConfiguration _configuration;
         private readonly CommonConfig _commonConfig;
 
-
         public RedisController(IConfiguration config, RedisRepository<MyDataModel> redisRepository, CommonConfig commonConfig)
         {
             //var connectionString = config.GetConnectionString("Redis");
